@@ -1,2 +1,3 @@
 # gradleoverlay
-Gradle plugin to overlay student submissions for grading
+
+Gradle plugin to overlay student submissions for grading.

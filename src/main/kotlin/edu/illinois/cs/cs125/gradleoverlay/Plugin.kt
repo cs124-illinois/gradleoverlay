@@ -2,8 +2,8 @@ package edu.illinois.cs.cs125.gradleoverlay
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.apache.tools.ant.DirectoryScanner
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
@@ -22,12 +22,12 @@ data class Overlay(
     val overwrite: List<String>,
     val merge: List<String> = listOf(),
     val delete: List<String> = listOf(),
-    val checkpoints: Map<String, Checkpoint> = mapOf()
+    val checkpoints: Map<String, Checkpoint> = mapOf(),
 ) {
     data class Checkpoint(
         val overwrite: List<String> = listOf(),
         val merge: List<String> = listOf(),
-        val delete: List<String> = listOf()
+        val delete: List<String> = listOf(),
     )
 }
 
@@ -37,7 +37,7 @@ open class Task : DefaultTask() {
 
     @TaskAction
     fun run() {
-        val mapper = ObjectMapper(YAMLFactory()).also { it.registerModule(KotlinModule()) }
+        val mapper = ObjectMapper(YAMLFactory()).also { it.registerKotlinModule() }
 
         val config = mapper.readValue<Overlay>(project.file("config/overlay.yaml"))
 

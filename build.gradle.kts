@@ -1,50 +1,48 @@
 plugins {
-    kotlin("jvm") version "1.5.31"
+    kotlin("jvm") version "1.9.0"
     `java-gradle-plugin`
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "7.0.0"
-    id("org.jmailen.kotlinter") version "3.6.0"
-    id("com.github.ben-manes.versions") version "0.39.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("org.jmailen.kotlinter") version "3.15.0"
+    id("com.github.ben-manes.versions") version "0.47.0"
 }
 
-group = "com.github.cs125-illinois"
-version = "2021.9.0"
+group = "com.github.cs124-illinois"
+version = "2023.7.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.31")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.31")
     implementation(gradleApi())
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.5")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.12.5")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2")
 }
 gradlePlugin {
     plugins {
         create("plugin") {
-            id = "com.github.cs125-illinois.gradleoverlay"
+            id = "com.github.cs124-illinois.gradleoverlay"
             implementationClass = "edu.illinois.cs.cs125.gradleoverlay.Plugin"
         }
     }
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
 }
 tasks.dependencyUpdates {
-    resolutionStrategy {
-        componentSelection {
-            all {
-                if (listOf("alpha", "beta", "rc", "cr", "m", "preview", "b", "ea", "eap", "pr").any { qualifier ->
-                        candidate.version.matches(Regex("(?i).*[.-]$qualifier[.\\d-+]*"))
-                    }) {
-                    reject("Release candidate")
-                }
-            }
+    rejectVersionIf {
+        listOf("alpha", "beta", "rc", "cr", "m", "preview", "b", "ea", "eap", "pr").any { qualifier ->
+            candidate.version.matches(Regex("(?i).*[.-]$qualifier[.\\d-+]*"))
         }
     }
     gradleReleaseChannel = "current"
 }
+
