@@ -48,13 +48,13 @@ open class Task : DefaultTask() {
         val targetRoot = project.projectDir
         println("Overlaying from $studentRoot to $targetRoot")
 
-        val overlayConfig = if (config.checkpoints.keys.isNotEmpty()) {
-            mapper.readValue<CheckpointConfig>(File(studentRoot, "grade.yaml")).checkpoint.let {
-                config.checkpoints[it.toString()]
-            }
-        } else {
+        val currentCheckpoint = try {
+            project.property("checkpoint")?.toString()
+        } catch (_: Exception) {
             null
-        }
+        } ?: mapper.readValue<CheckpointConfig>(File(studentRoot, "grade.yaml")).checkpoint.toString()
+
+        val overlayConfig = config.checkpoints[currentCheckpoint]
 
         (config.delete + config.overwrite).rm(targetRoot)
         if (overlayConfig != null) {

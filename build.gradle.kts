@@ -1,14 +1,14 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.10"
     `java-gradle-plugin`
     `maven-publish`
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jmailen.kotlinter") version "3.15.0"
-    id("com.github.ben-manes.versions") version "0.47.0"
+    id("org.jmailen.kotlinter") version "3.16.0"
+    id("com.github.ben-manes.versions") version "0.48.0"
 }
 
 group = "com.github.cs124-illinois"
-version = "2023.7.0"
+version = "2023.10.0"
 
 repositories {
     mavenCentral()
