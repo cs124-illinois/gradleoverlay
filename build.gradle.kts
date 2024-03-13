@@ -1,16 +1,16 @@
 plugins {
-    kotlin("jvm") version "1.9.10"
+    kotlin("jvm") version "1.9.23"
     `java-gradle-plugin`
     `maven-publish`
     signing
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jmailen.kotlinter") version "3.16.0"
-    id("com.github.ben-manes.versions") version "0.48.0"
+    id("org.jmailen.kotlinter") version "4.2.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
 group = "org.cs124"
-version = "2023.11.0"
+version = "2024.3.0"
 
 repositories {
     mavenCentral()
@@ -18,9 +18,9 @@ repositories {
 
 dependencies {
     implementation(gradleApi())
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.0")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.0")
 }
 gradlePlugin {
     plugins {

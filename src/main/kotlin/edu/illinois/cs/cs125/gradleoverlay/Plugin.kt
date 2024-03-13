@@ -34,7 +34,6 @@ data class Overlay(
 data class CheckpointConfig(val checkpoint: Int)
 
 open class Task : DefaultTask() {
-
     @TaskAction
     fun run() {
         val mapper = ObjectMapper(YAMLFactory()).also { it.registerKotlinModule() }
@@ -48,11 +47,12 @@ open class Task : DefaultTask() {
         val targetRoot = project.projectDir
         println("Overlaying from $studentRoot to $targetRoot")
 
-        val currentCheckpoint = try {
-            project.property("checkpoint")?.toString()
-        } catch (_: Exception) {
-            null
-        } ?: mapper.readValue<CheckpointConfig>(File(studentRoot, "grade.yaml")).checkpoint.toString()
+        val currentCheckpoint =
+            try {
+                project.property("checkpoint")?.toString()
+            } catch (_: Exception) {
+                null
+            } ?: mapper.readValue<CheckpointConfig>(File(studentRoot, "grade.yaml")).checkpoint.toString()
 
         val overlayConfig = config.checkpoints[currentCheckpoint]
 
@@ -66,7 +66,10 @@ open class Task : DefaultTask() {
         }
     }
 
-    private fun Collection<String>.cp(studentRoot: File, testRoot: File) {
+    private fun Collection<String>.cp(
+        studentRoot: File,
+        testRoot: File,
+    ) {
         DirectoryScanner().also { scanner ->
             scanner.setIncludes(toTypedArray())
             scanner.basedir = studentRoot
