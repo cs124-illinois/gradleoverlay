@@ -1,16 +1,19 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "2.0.21"
     `java-gradle-plugin`
     `maven-publish`
     signing
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jmailen.kotlinter") version "4.2.0"
+    id("org.jmailen.kotlinter") version "4.4.1"
     id("com.github.ben-manes.versions") version "0.51.0"
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 group = "org.cs124"
-version = "2024.3.0"
+version = "2024.10.0"
 
 repositories {
     mavenCentral()
@@ -18,9 +21,9 @@ repositories {
 
 dependencies {
     implementation(gradleApi())
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.0")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.0")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.0")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.0")
 }
 gradlePlugin {
     plugins {
@@ -30,9 +33,9 @@ gradlePlugin {
         }
     }
 }
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+tasks.withType<KotlinCompile> {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 tasks.dependencyUpdates {
@@ -44,8 +47,8 @@ tasks.dependencyUpdates {
     gradleReleaseChannel = "current"
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
     }

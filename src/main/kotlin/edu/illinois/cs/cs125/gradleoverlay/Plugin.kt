@@ -31,7 +31,9 @@ data class Overlay(
     )
 }
 
-data class CheckpointConfig(val checkpoint: Int)
+data class CheckpointConfig(
+    val checkpoint: Int,
+)
 
 open class Task : DefaultTask() {
     @TaskAction
