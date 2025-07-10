@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "org.cs124"
-version = "2025.2.0"
+version = "2025.7.0"
 
 repositories {
     mavenCentral()
