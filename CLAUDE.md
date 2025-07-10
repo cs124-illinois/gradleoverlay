@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a Gradle plugin called `gradleoverlay` used for educational purposes at University of Illinois CS courses. It overlays student code submissions onto a base project structure for grading by selectively copying, merging, or deleting files based on YAML configuration.
 
+## Versioning
+
+- The project uses date-based versioning, with the current year, the current month, followed by a minor version number.
+
 ## Key Commands
 
 ### Development
