@@ -6,3 +6,4 @@ gen/
 out/
 buildSrc/local.properties
 /email.txt
+.kotlin
