@@ -14,7 +14,7 @@ import java.io.File
 @Suppress("UNUSED")
 class Plugin : Plugin<Project> {
     override fun apply(project: Project) {
-        project.tasks.create("overlay", Task::class.java)
+        project.tasks.register("overlay", Task::class.java)
     }
 }
 
