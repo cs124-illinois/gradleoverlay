@@ -2,18 +2,18 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.20"
     `java-gradle-plugin`
     `maven-publish`
     signing
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jmailen.kotlinter") version "5.1.1"
-    id("com.github.ben-manes.versions") version "0.52.0"
+    id("com.gradleup.shadow") version "9.2.2"
+    id("org.jmailen.kotlinter") version "5.2.0"
+    id("com.github.ben-manes.versions") version "0.53.0"
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 group = "org.cs124"
-version = "2025.7.0"
+version = "2025.10.0"
 
 repositories {
     mavenCentral()
@@ -21,9 +21,9 @@ repositories {
 
 dependencies {
     implementation(gradleApi())
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.19.1")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.1")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.19.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.20.0")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.20.0")
 }
 gradlePlugin {
     plugins {
