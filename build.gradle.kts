@@ -82,11 +82,19 @@ publishing {
                         url = "https://github.com/cs124-illinois/gradleoverlay"
                     }
                 }
-                signing {
-                    sign(this@publications)
-                }
             }
         }
+    }
+}
+signing {
+    setRequired {
+        gradle.taskGraph.allTasks.any { it.name.contains("ToSonatype") }
+    }
+    sign(publishing.publications)
+}
+tasks.withType<Sign>().configureEach {
+    onlyIf {
+        gradle.taskGraph.allTasks.any { it.name.contains("ToSonatype") }
     }
 }
 nexusPublishing {
